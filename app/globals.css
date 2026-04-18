@@ -30,7 +30,7 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--text);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), serif;
 }
 
 button {
@@ -43,26 +43,24 @@ img {
 }
 
 .page-shell {
-  padding: 48px 20px 64px;
+  padding: 20px 12px 40px;
 }
 
 .panel {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 32px;
+  padding: 18px;
   border: 1px solid var(--panel-border);
-  border-radius: 32px;
+  border-radius: 24px;
   background: var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
 }
 
 .hero {
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
+  display: grid;
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
 .hero h1,
@@ -73,8 +71,8 @@ img {
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: 0.95;
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 0.98;
 }
 
 .eyebrow {
@@ -92,15 +90,15 @@ img {
 
 .hero-actions {
   display: grid;
-  gap: 12px;
-  justify-items: end;
+  gap: 10px;
+  justify-items: start;
 }
 
 .primary-button,
 .secondary-button {
   border: 0;
   border-radius: 999px;
-  padding: 0.85rem 1.15rem;
+  padding: 0.9rem 1.15rem;
   cursor: pointer;
   transition:
     transform 140ms ease,
@@ -152,26 +150,26 @@ img {
 .series-grid,
 .skeleton-grid {
   display: grid;
-  gap: 18px;
+  gap: 14px;
 }
 
 .series-card {
   position: relative;
   display: grid;
-  grid-template-columns: 124px minmax(0, 1fr);
-  gap: 18px;
-  padding: 18px;
-  border-radius: 24px;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 14px;
+  padding: 14px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(60, 47, 28, 0.08);
 }
 
 .series-rank {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  min-width: 34px;
-  height: 34px;
+  top: 10px;
+  right: 10px;
+  min-width: 30px;
+  height: 30px;
   display: grid;
   place-items: center;
   border-radius: 999px;
@@ -181,14 +179,14 @@ img {
 }
 
 .series-poster-wrap {
-  width: 124px;
+  width: 88px;
 }
 
 .series-poster,
 .placeholder-poster {
-  width: 124px;
+  width: 88px;
   aspect-ratio: 2 / 3;
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--poster-bg);
 }
 
@@ -201,59 +199,69 @@ img {
 
 .series-content {
   display: grid;
-  gap: 14px;
+  gap: 12px;
+  min-width: 0;
 }
 
 .series-heading {
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  gap: 8px;
 }
 
 .series-state {
   margin: 0 0 4px;
   color: var(--accent);
-  font-size: 0.85rem;
+  font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
+.series-heading h2 {
+  font-size: 1.2rem;
+  line-height: 1.05;
+  padding-right: 32px;
+}
+
 .series-last-played {
   margin: 0;
-  text-align: right;
+  text-align: left;
   color: var(--muted);
+  font-size: 0.94rem;
 }
 
 .series-metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 8px;
   margin: 0;
 }
 
 .series-metrics div {
-  padding: 12px 14px;
-  border-radius: 16px;
+  padding: 10px 12px;
+  border-radius: 14px;
   background: #f7efe1;
 }
 
 .series-metrics dt {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
 }
 
 .series-metrics dd {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
 .action-stack {
   display: grid;
-  justify-items: start;
   gap: 8px;
+}
+
+.action-stack .primary-button {
+  width: 100%;
+  justify-content: center;
 }
 
 .status-success,
@@ -271,7 +279,7 @@ img {
 }
 
 .empty-state {
-  padding: 40px 18px;
+  padding: 32px 18px;
   text-align: center;
   border: 1px dashed rgba(60, 47, 28, 0.18);
   border-radius: 24px;
@@ -307,31 +315,92 @@ img {
     padding: 22px;
     border-radius: 24px;
   }
+}
 
-  .hero,
-  .series-heading {
-    grid-template-columns: 1fr;
-    display: grid;
+@media (min-width: 801px) {
+  .page-shell {
+    padding: 48px 20px 64px;
+  }
+
+  .panel {
+    padding: 32px;
+    border-radius: 32px;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: start;
+    margin-bottom: 24px;
   }
 
   .hero-actions {
-    justify-items: start;
+    justify-items: end;
   }
 
   .series-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: 124px minmax(0, 1fr);
+    gap: 18px;
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .series-rank {
+    top: 14px;
+    right: 14px;
+    min-width: 34px;
+    height: 34px;
   }
 
   .series-poster-wrap {
-    width: 100%;
+    width: 124px;
   }
 
   .series-poster,
   .placeholder-poster {
-    width: min(220px, 100%);
+    width: 124px;
+    border-radius: 18px;
+  }
+
+  .series-content {
+    gap: 14px;
+  }
+
+  .series-heading {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .series-heading h2 {
+    font-size: 1.8rem;
+    padding-right: 0;
   }
 
   .series-last-played {
-    text-align: left;
+    text-align: right;
+  }
+
+  .series-metrics {
+    gap: 12px;
+  }
+
+  .series-metrics div {
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .series-metrics dt {
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+  }
+
+  .series-metrics dd {
+    font-size: 1.15rem;
+  }
+
+  .action-stack .primary-button {
+    width: auto;
   }
 }

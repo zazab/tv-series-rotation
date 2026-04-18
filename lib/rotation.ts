@@ -32,7 +32,18 @@ export function formatLastPlayedLabel(lastPlayedAt: string | null) {
     return "Never played";
   }
 
-  return `Last played ${new Date(lastPlayedAt).toLocaleString()}`;
+  return `Last played ${formatDateTime(lastPlayedAt)}`;
+}
+
+export function formatDateTime(value: string) {
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  }).format(new Date(value));
 }
 
 export function aggregateHistoryBySeries(

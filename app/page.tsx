@@ -1,4 +1,5 @@
 import { RefreshButton } from "@/components/refresh-button";
+import { formatDateTime } from "@/lib/rotation";
 import { SeriesRotationList } from "@/components/series-rotation-list";
 import { getSeriesRotation } from "@/lib/rotation-service";
 
@@ -21,7 +22,7 @@ export default async function Home() {
           </div>
           <div className="hero-actions">
             <RefreshButton />
-            <p className="timestamp">Last refreshed: {new Date(refreshedAt).toLocaleString()}</p>
+            <p className="timestamp">Last refreshed: {formatDateTime(refreshedAt)}</p>
           </div>
         </div>
 
