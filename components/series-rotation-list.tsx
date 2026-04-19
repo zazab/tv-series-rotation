@@ -49,17 +49,19 @@ export function SeriesRotationList({ items }: SeriesRotationListProps) {
                 <p className="series-last-played">{formatLastPlayedLabel(item.lastPlayedAt)}</p>
               </div>
             </div>
-            <dl className="series-metrics">
-              <div>
-                <dt>Total episodes</dt>
-                <dd>{item.episodeCount ?? "Unknown"}</dd>
-              </div>
-              <div>
-                <dt>Watched episodes</dt>
-                <dd>{item.watchedEpisodeCount ?? "Unknown"}</dd>
-              </div>
-            </dl>
-            <MarkUnwatchedButton ratingKey={item.plexRatingKey} title={item.title} />
+            <div className="series-footer">
+              <dl className="series-metrics">
+                <div>
+                  <dt>Total episodes</dt>
+                  <dd>{item.episodeCount ?? "Unknown"}</dd>
+                </div>
+                <div>
+                  <dt>Watched episodes</dt>
+                  <dd>{item.watchedEpisodeCount ?? "Unknown"}</dd>
+                </div>
+              </dl>
+              <MarkUnwatchedButton ratingKey={item.plexRatingKey} title={item.title} />
+            </div>
           </div>
         </article>
       ))}
