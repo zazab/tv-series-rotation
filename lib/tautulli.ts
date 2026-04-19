@@ -1,4 +1,4 @@
-import { getEnv } from "@/lib/env";
+import { getConfig } from "@/lib/config";
 import { aggregateHistoryBySeries, buildSeriesLookup } from "@/lib/rotation";
 import type { TautulliHistoryEntry } from "@/lib/types";
 
@@ -24,9 +24,9 @@ export async function getLastPlayedMapForSeries(
     title: string;
   }>
 ) {
-  const env = getEnv();
+  const config = getConfig();
   const seriesLookup = buildSeriesLookup(series);
-  const directMatches = await getDirectHistoryMatches(series, env);
+  const directMatches = await getDirectHistoryMatches(series, config);
   const unresolvedSeries = series.filter((item) => !directMatches.has(item.ratingKey));
 
   if (unresolvedSeries.length === 0) {
@@ -38,7 +38,7 @@ export async function getLastPlayedMapForSeries(
 
   for (let page = 0; page < MAX_PAGES; page += 1) {
     const pageEntries = await fetchHistoryPage({
-      env,
+      config,
       start: page * PAGE_SIZE,
       length: PAGE_SIZE
     });
@@ -64,7 +64,7 @@ async function getDirectHistoryMatches(
     ratingKey: string;
     title: string;
   }>,
-  env: ReturnType<typeof getEnv>
+  config: ReturnType<typeof getConfig>
 ) {
   const matches = new Map<string, string>();
 
@@ -73,7 +73,7 @@ async function getDirectHistoryMatches(
     const batchResults = await Promise.all(
       batch.map(async (item) => {
         const entries = await fetchHistoryPage({
-          env,
+          config,
           length: 1,
           grandparentRatingKey: item.ratingKey
         });
@@ -100,20 +100,20 @@ async function getDirectHistoryMatches(
 }
 
 async function fetchHistoryPage({
-  env,
+  config,
   start,
   length,
   ratingKey,
   grandparentRatingKey
 }: {
-  env: ReturnType<typeof getEnv>;
+  config: ReturnType<typeof getConfig>;
   start?: number;
   length: number;
   ratingKey?: string;
   grandparentRatingKey?: string;
 }) {
-  const url = new URL(`${env.TAUTULLI_BASE_URL}/api/v2`);
-  url.searchParams.set("apikey", env.TAUTULLI_API_KEY);
+  const url = new URL(`${config.TAUTULLI_BASE_URL}/api/v2`);
+  url.searchParams.set("apikey", config.TAUTULLI_API_KEY);
   url.searchParams.set("cmd", "get_history");
   url.searchParams.set("media_type", "episode");
   url.searchParams.set("length", String(length));
@@ -132,8 +132,8 @@ async function fetchHistoryPage({
     url.searchParams.set("grandparent_rating_key", grandparentRatingKey);
   }
 
-  if (env.PLEX_TV_LIBRARY_SECTION_ID) {
-    url.searchParams.set("section_id", env.PLEX_TV_LIBRARY_SECTION_ID);
+  if (config.PLEX_TV_LIBRARY_SECTION_ID) {
+    url.searchParams.set("section_id", config.PLEX_TV_LIBRARY_SECTION_ID);
   }
 
   const response = await fetch(url, {

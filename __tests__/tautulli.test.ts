@@ -1,7 +1,7 @@
 import { getLastPlayedMapForSeries } from "@/lib/tautulli";
 
-vi.mock("@/lib/env", () => ({
-  getEnv: () => ({
+vi.mock("@/lib/config", () => ({
+  getConfig: () => ({
     PLEX_BASE_URL: "http://plex.local",
     PLEX_TOKEN: "token",
     PLEX_TV_LIBRARY_SECTION_ID: "2",

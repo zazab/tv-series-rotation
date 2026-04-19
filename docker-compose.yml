@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ${CONFIG_FILE_PATH:-./config.local.json}:/config/config.json:ro
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

@@ -1,0 +1,8 @@
+{
+  "PLEX_BASE_URL": "http://localhost:32400",
+  "PLEX_TOKEN": "your-plex-token",
+  "PLEX_TV_LIBRARY_SECTION_ID": "2",
+  "PLEX_COLLECTION_RATING_KEY": "12345",
+  "TAUTULLI_BASE_URL": "http://localhost:8181",
+  "TAUTULLI_API_KEY": "your-tautulli-api-key"
+}

@@ -21,6 +21,10 @@ pnpm-debug.log*
 .env.test.local
 .env.production.local
 
+# Local config files
+config.local.json
+config.json
+
 # OS and editor files
 .DS_Store
 Thumbs.db

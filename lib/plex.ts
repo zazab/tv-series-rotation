@@ -1,4 +1,4 @@
-import { getEnv } from "@/lib/env";
+import { getConfig } from "@/lib/config";
 import type { PlexCollectionItem } from "@/lib/types";
 
 type PlexMetadataResponse = {
@@ -16,22 +16,22 @@ type PlexMetadataResponse = {
 };
 
 export function plexHeaders() {
-  const env = getEnv();
+  const config = getConfig();
 
   return {
     Accept: "application/json",
-    "X-Plex-Token": env.PLEX_TOKEN
+    "X-Plex-Token": config.PLEX_TOKEN
   };
 }
 
 export function toPlexUrl(path: string) {
-  return `${getEnv().PLEX_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+  return `${getConfig().PLEX_BASE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export async function getCollectionItems() {
-  const env = getEnv();
+  const config = getConfig();
   const response = await fetch(
-    toPlexUrl(`/library/collections/${env.PLEX_COLLECTION_RATING_KEY}/children?includeGuids=1`),
+    toPlexUrl(`/library/collections/${config.PLEX_COLLECTION_RATING_KEY}/children?includeGuids=1`),
     {
       headers: plexHeaders(),
       cache: "no-store"
