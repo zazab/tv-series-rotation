@@ -12,6 +12,7 @@ type PlexMetadataResponse = {
       type?: string;
     }>;
     title1?: string;
+    title2?: string;
   };
 };
 
@@ -44,6 +45,11 @@ export async function getCollectionItems() {
 
   const payload = (await response.json()) as PlexMetadataResponse;
   const metadata = payload.MediaContainer?.Metadata ?? [];
+  const collectionTitle =
+    (await getCollectionTitle(config.PLEX_COLLECTION_RATING_KEY)) ??
+    payload.MediaContainer?.title2 ??
+    payload.MediaContainer?.title1 ??
+    null;
 
   const items: PlexCollectionItem[] = metadata
     .filter((item) => item.type === "show" && item.ratingKey && item.title)
@@ -57,9 +63,24 @@ export async function getCollectionItems() {
     }));
 
   return {
-    title: payload.MediaContainer?.title1 ?? null,
+    title: collectionTitle,
     items
   };
+}
+
+async function getCollectionTitle(ratingKey: string) {
+  const response = await fetch(toPlexUrl(`/library/metadata/${ratingKey}`), {
+    headers: plexHeaders(),
+    cache: "no-store"
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const payload = (await response.json()) as PlexMetadataResponse;
+
+  return payload.MediaContainer?.Metadata?.[0]?.title ?? null;
 }
 
 export async function markSeriesUnwatched(ratingKey: string) {

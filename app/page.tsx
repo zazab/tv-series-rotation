@@ -13,7 +13,7 @@ export default async function Home() {
       <section className="panel">
         <div className="hero">
           <div>
-            <p className="eyebrow">TV Rotation</p>
+            <p className="eyebrow">rotatorr</p>
             <h1>{collectionTitle ?? "Configured Plex Collection"}</h1>
             <p className="muted">
               Новые сверху, остальное отсортировано по дате последнего просмотра,
