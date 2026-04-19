@@ -1,6 +1,7 @@
 services:
   rotatorr:
     image: zzazab/rotatorr:latest
+    pull_policy: always
     volumes:
       - ${CONFIG_FILE_PATH:-./config.local.json}:/config/config.json:ro
     ports:
