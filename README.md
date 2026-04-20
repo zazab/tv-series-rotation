@@ -1,4 +1,4 @@
-# TV Series Rotation
+# Rotatorr
 
 A private self-hosted Next.js app that reads one Plex collection, uses Tautulli history to determine when each show was last played, and orders the collection for rotation viewing.
 
@@ -23,7 +23,7 @@ By default Compose mounts `./config.local.json` into the container at `/config/c
 If your config file lives elsewhere, point Compose at it with a non-secret path override:
 
 ```bash
-CONFIG_FILE_PATH=/mnt/apps/tv-series-rotation/config.json docker-compose up -d
+CONFIG_FILE_PATH=/mnt/apps/rotatorr/config.json docker-compose up -d
 ```
 
 For TrueNAS, mount your external config file to `/config/config.json` in the container instead of storing secrets in environment variables.
@@ -94,7 +94,7 @@ GitHub Actions includes a manual workflow that can build and push this image to 
 
 1. Add the `DOCKERHUB_USERNAME` repository secret.
 2. Add the `DOCKERHUB_TOKEN` repository secret.
-3. Optionally add the `DOCKERHUB_REPOSITORY` repository variable if you want a repository name other than `<DOCKERHUB_USERNAME>/tv-series-rotation`.
+3. Optionally add the `DOCKERHUB_REPOSITORY` repository variable if you want a repository name other than `<DOCKERHUB_USERNAME>/rotatorr`.
 4. In GitHub, run the `Docker Publish` workflow from the Actions tab.
 5. Optionally provide a `version` input. If left blank, the workflow uses `package.json`'s version.
 
