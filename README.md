@@ -29,7 +29,7 @@ CONFIG_FILE_PATH=/mnt/apps/rotatorr/config.json docker-compose up -d
 To intentionally upgrade or test another published image tag, set `ROTATORR_VERSION` when starting Compose:
 
 ```bash
-ROTATORR_VERSION=0.1.3 docker-compose up -d
+ROTATORR_VERSION=0.1.4 docker-compose up -d
 ```
 
 For TrueNAS, mount your external config file to `/config/config.json` in the container instead of storing secrets in environment variables.
